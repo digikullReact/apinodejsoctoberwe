@@ -1,14 +1,23 @@
 const fileUploads=[]
+const {uploadToCloudinary}=require("../services/cloudinaryservice");
 
-
-const fileUpload=(req,res)=>{
+const fileUpload=(req,res,next)=>{
 
     // We will upload our file
+    uploadToCloudinary(req.files.file.path).then(data=>{
 
 
     res.json({
-        message:"File Upload Success"
+        message:"File Upload Success",
+        fileLink:data
     })
+
+    }).catch(err=>{
+        next(err.toString());
+        
+    })
+
+
 
 }
 
