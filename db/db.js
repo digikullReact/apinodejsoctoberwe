@@ -67,6 +67,13 @@ return new Promise((res,rej)=>{
 }
 
 const getAllUsers=()=>{
+
+    // We will get all the users in our collection
+   // findOne();
+   return  User.find();
+}
+
+const _getAllUsers=()=>{
     return USERS;
 }
 

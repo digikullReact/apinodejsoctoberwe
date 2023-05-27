@@ -2,12 +2,17 @@ const {getAllUsers,updateUserbyIdDb,getUserbyId}=require("../db/db");
 
 const getUserData=(req,res)=>{
 
-    const users=getAllUsers();
+ getAllUsers().then(users=>{
+        res.json({
+            message:"Success",
+            data:users
+        })
 
-    res.json({
-        message:"Success",
-        data:users
+    }).catch(err=>{
+       next(err);
     })
+
+    
 
 
 
