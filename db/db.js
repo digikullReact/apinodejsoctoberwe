@@ -32,9 +32,34 @@ const createUser=(userData)=>{
 
     // save the new user
 
-    const user=new User(userData);
+    // check for the user if it already exists
+return new Promise((res,rej)=>{
 
-   return  user.save()  // it will save the user
+// Always returns first of the all records (only a single value)
+    User.findOne({userName:userData.userName}).then(data=>{
+        // data would be null if the record for the above condition is not existing in the db
+        if(data){
+            rej("UserName Already exists");
+        }else{
+
+            const user=new User(userData);
+
+           // it will save the user
+
+           res( user.save() )
+
+        }
+
+     
+
+    }).catch(err=>{
+         rej(err);
+    })
+
+   
+
+})
+
 
 
   

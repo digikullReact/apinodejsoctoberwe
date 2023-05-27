@@ -3,7 +3,7 @@ const app=require("./app");
 const connect=require("./db/mongodb");
 
 
-const URL="mongodb+srv://logan:eQRaHuURtx40mcuW@cluster0.hbpq6ge.mongodb.net/?retryWrites=true&w=majority"
+const URL="mongodb+srv://logan:eQRaHuURtx40mcuW@cluster0.hbpq6ge.mongodb.net/sepoct?retryWrites=true&w=majority"
 
 const port=process.env.PORT // form your os env
 

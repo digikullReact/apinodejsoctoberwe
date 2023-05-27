@@ -5,8 +5,14 @@ const { Schema } = mongoose;
 // in mongodb will look like
 
 const userSchema = new Schema({
-
-    name:String,
+    userName:{
+      
+        type:String
+    },
+    name:{
+        unique:true,
+        type:String
+    },
     age:Number
  
 });
