@@ -4,7 +4,7 @@ const {signup,login}=require("../controllers/authcontroller");
 const {encryptPassword,checkPassword}=require("../middlewares/middleware");
 
 router.post("/signup",encryptPassword,signup)
-router.post("/signin",checkPassword,login)
+router.post("/signin",login)
 
 
 

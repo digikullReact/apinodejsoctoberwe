@@ -1,5 +1,6 @@
-const {createUser}=require("../db/db");
+const {createUser, getUserByUsername}=require("../db/db");
 const  jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 
 const signup=(req,res,next)=>{
@@ -29,16 +30,42 @@ const signup=(req,res,next)=>{
 
 
 
-const login=(req,res)=>{
+const login=(req,res,next)=>{
 
-    // issuing the jwt 
-   const  token = jwt.sign({username:req.body.username}, process.env.JWTKEY);
-   res.json({
-        status:"Success",
-        token:token,
-        message:"User Logged In"
+    // You have to find the user by username from db
+    console.log(req.body.userName)
+    getUserByUsername(req.body.userName).then(user=>{
+        if(user){
+           // for the password comparison
+
+           bcrypt.compare(req.body.password, user.password, function(err, result) {
+            if(!result){
+                next(new Error("Please enter correct username or password"))
+            }else{
+                const  token = jwt.sign({username:req.body.userName}, process.env.JWTKEY);
+            res.json({
+                 status:"Success",
+                 token:token,
+                 message:"User Logged In"
+         
+             })
+            }
+        
+        });
+
+           
+        }else{
+            next("User Not found");
+        }
 
     })
+
+    // you have to check for the passwords
+
+    // then you have to issue the token
+
+    // issuing the jwt 
+  
 
 
 

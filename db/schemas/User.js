@@ -13,7 +13,10 @@ const userSchema = new Schema({
         unique:true,
         type:String
     },
-    age:Number
+    age:Number,
+    password:{
+        type:String
+    }
  
 });
 

@@ -77,9 +77,15 @@ const _getAllUsers=()=>{
     return USERS;
 }
 
-const getUserByUsername=(username)=>{
+const _getUserByUsername=(username)=>{
 
     return USERS.find(ele=>ele.username==username);
+
+}
+
+const getUserByUsername=(username)=>{
+
+    return User.findOne({userName:username});
 
 }
 
