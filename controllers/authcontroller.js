@@ -6,21 +6,23 @@ const signup=(req,res,next)=>{
 
     const user=req.body;
 
-   let result= createUser(user)
-   if(result){
+   let result= createUser(user).then(result=>{
     res.json({
         status:"Success",
         messag:"User Created"
 
     })
+   }).catch(err=>{
 
-   }else{
-    // if you invoke next like this anywhere in your code 
+        // if you invoke next like this anywhere in your code 
     // it will just hit the error middlewar
    // throw new Error("Errorororo")
-   next(new Error("User Already Exists"))
 
-   }
+    next(new Error("User Already Exists"))
+
+
+   })
+
 
    
 }

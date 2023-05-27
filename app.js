@@ -5,6 +5,7 @@ const userRouter=require("./routes/user")
 const fileUploadRoputer=require("./routes/fileuploadRoutes");
 const cors=require("cors");
 
+
 const {errorMiddleware}=require("./middlewares/middleware");
 app.use(cors());
 app.use(express.json());

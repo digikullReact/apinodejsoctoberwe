@@ -25,7 +25,7 @@ const fileUpload=(req,res,next)=>{
 const S3fileUpload=(req,res,next)=>{
 
 
-  //  console.log(req.file);
+   console.log(req.file);
    // console.log( req.file.originalname.split("."))
     fileUploadS3(req.file).then(data=>{
 
