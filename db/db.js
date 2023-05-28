@@ -136,12 +136,14 @@ const updateUserbyIdDbByName=(id,data)=>{
 
 }
 
-const paginatedGet=(limit,page,sortField,sortOrder)=>{
+const paginatedGet=(limit,page,sortField,sortOrder,search)=>{
 
     // skip is used to skip the records which are already seen 
     // limit is used to get the number of records per page 
+    sortOrder=sortOrder=="desc"?-1:0;
+    const re=new RegExp(search, 'gi');
 
-    return User.find().skip(limit*page).limit(limit).sort({[sortField]:sortOrder})
+    return User.find({name:{ $regex:re }}).skip(limit*page).limit(limit).sort({[sortField]:sortOrder})
 
 }
 
