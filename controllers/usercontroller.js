@@ -34,16 +34,24 @@ const getUserbyIdController=(req,res)=>{
 
 // Create a A user profile edit api --->
 
-const updateUserById=(req,res)=>{
+const updateUserById=(req,res,next)=>{
 
-    const data=updateUserbyIdDb(req.params.id,req.body);
+ updateUserbyIdDb(req.params.id,req.body).then(data=>{
 
     res.json({
         message:"Success",
         data
     })
 
+ }).catch(err=>{
+    next(err);
+ })
+
+   
+
 }
+
+// You have to write a controller method that updates on the basis of userName and _id
 
 module.exports={
     getUserData,

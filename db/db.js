@@ -95,13 +95,22 @@ const getUserbyId=(id)=>{
 
 }
 
-const updateUserbyIdDb=(id,data)=>{
+const _updateUserbyIdDb=(id,data)=>{
     let filteredAt= USERS.filter(ele=>ele.id!=id);
     data.id=id
     filteredAt.push(data);
     USERS=[...filteredAt]
    return true
 
+
+}
+
+const updateUserbyIdDb=(id,data)=>{
+
+    // Update query -->
+
+    return User.updateOne({_id:id},{$set:{...data}})
+   
 
 }
 
