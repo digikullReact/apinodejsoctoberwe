@@ -136,7 +136,7 @@ const updateUserbyIdDbByName=(id,data)=>{
 
 }
 
-const paginatedGet=(limit,page,sortField,sortOrder,search)=>{
+const paginatedGet=(limit=10,page=0,sortField="name",sortOrder="asc",search)=>{
 
     // skip is used to skip the records which are already seen 
     // limit is used to get the number of records per page 
