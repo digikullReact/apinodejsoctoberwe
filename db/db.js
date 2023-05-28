@@ -114,10 +114,44 @@ const updateUserbyIdDb=(id,data)=>{
 
 }
 
+const deleteUserbyIdDb=(id)=>{
+
+    // Update query -->
+
+    // find query --
+
+    // insert into another collection deleted collection
+
+    return User.deleteOne({_id:id});  // remove it forver from the db
+   
+
+}
+
+const updateUserbyIdDbByName=(id,data)=>{
+
+    // Update query -->
+
+    return User.updateOne({_id:id,name:data.name},{$set:{...data}})
+   
+
+}
+
+const paginatedGet=(limit,page)=>{
+
+    // skip is used to skip the records which are already seen 
+    // limit is used to get the number of records per page 
+
+    return User.find().skip(limit*page).limit(limit);
+
+}
+
 module.exports={
     getAllUsers,
     getUserByUsername,
     createUser,
     getUserbyId,
-    updateUserbyIdDb
+    updateUserbyIdDb,
+    updateUserbyIdDbByName,
+    deleteUserbyIdDb,
+    paginatedGet
 }

@@ -1,4 +1,4 @@
-const {getAllUsers,updateUserbyIdDb,getUserbyId}=require("../db/db");
+const {getAllUsers,updateUserbyIdDb,getUserbyId, updateUserbyIdDbByName, deleteUserbyIdDb, paginatedGet}=require("../db/db");
 
 const getUserData=(req,res)=>{
 
@@ -17,6 +17,33 @@ const getUserData=(req,res)=>{
 
 
 }
+
+// Pagination Api
+
+const getUserDataPaginated=(req,res,next)=>{
+
+   // console.log(req.query)
+
+
+    paginatedGet(req.query.limit,req.query.page).then(data=>{
+       
+
+        res.json({
+            message:"Successiiiii",
+            data
+        })
+       
+    }).catch(err=>{
+        next(err);
+    })
+   
+
+   
+   
+   }
+
+
+
 // should be protected api
 
 // Create a  get user profile api ----> so user will pass the id and you have to gets it data
@@ -53,8 +80,45 @@ const updateUserById=(req,res,next)=>{
 
 // You have to write a controller method that updates on the basis of userName and _id
 
+const updateUserByIdAndUserName=(req,res,next)=>{
+
+    updateUserbyIdDbByName(req.params.id,req.body).then(data=>{
+   
+       res.json({
+           message:"Success",
+           data
+       })
+   
+    }).catch(err=>{
+       next(err);
+    })
+   
+      
+   
+   }
+   
+   const deleteByUserById=(req,res,next)=>{
+
+    deleteUserbyIdDb(req.params.id).then(data=>{
+   
+       res.json({
+           message:"Success",
+           data
+       })
+   
+    }).catch(err=>{
+       next(err);
+    })
+   
+      
+   
+   }
+
 module.exports={
     getUserData,
     getUserbyIdController,
-    updateUserById
+    updateUserById,
+    updateUserByIdAndUserName,
+    deleteByUserById,
+    getUserDataPaginated
 }
