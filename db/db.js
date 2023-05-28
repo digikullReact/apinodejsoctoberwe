@@ -136,12 +136,12 @@ const updateUserbyIdDbByName=(id,data)=>{
 
 }
 
-const paginatedGet=(limit,page)=>{
+const paginatedGet=(limit,page,sortField,sortOrder)=>{
 
     // skip is used to skip the records which are already seen 
     // limit is used to get the number of records per page 
 
-    return User.find().skip(limit*page).limit(limit);
+    return User.find().skip(limit*page).limit(limit).sort({[sortField]:sortOrder})
 
 }
 
