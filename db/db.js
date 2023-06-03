@@ -177,6 +177,26 @@ const calculateTotalOrderPrice=(name)=>{
 }
 
 
+const calculateMax=(name)=>{
+
+
+    return  Order.aggregate([
+ 
+       {
+          $group:{
+             _id:null,
+             maxAmount:{$max:"$totalAmount"}
+ 
+          }
+       },
+       
+ 
+     ])
+ 
+ }
+
+
+
 module.exports={
     getAllUsers,
     getUserByUsername,
@@ -187,5 +207,7 @@ module.exports={
     deleteUserbyIdDb,
     paginatedGet,
     saveOrder,
-    calculateTotalOrderPrice
+    calculateTotalOrderPrice,
+    calculateMax
 }
+

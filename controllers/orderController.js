@@ -1,4 +1,4 @@
-const {saveOrder,calculateTotalOrderPrice}=require("../db/db");
+const {saveOrder,calculateTotalOrderPrice,calculateMax}=require("../db/db");
 
 const placeOrder=(req,res,next)=>{
 
@@ -16,10 +16,15 @@ const placeOrder=(req,res,next)=>{
 const getTotalOrderAmount=(req,res,next)=>{
 
     calculateTotalOrderPrice(req.query.name).then(data=>{
-        res.json({
-            message:"success",
-            data
+        calculateMax().then(max=>{
+            res.json({
+                message:"success",
+                data,
+                max
+            })
+
         })
+       
     }).catch(err=>{
         next(err);
     })
