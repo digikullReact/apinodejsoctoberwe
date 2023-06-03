@@ -2,6 +2,7 @@
 // DAO (Data access object layer --->which interacts with the database)
 const { v4: uuidv4 } = require('uuid');
 const User=require("./schemas/User");
+const Order=require("./schemas/Order");
 
 let  USERS=[]
 
@@ -147,6 +148,35 @@ const paginatedGet=(limit=10,page=0,sortField="name",sortOrder="asc",search)=>{
 
 }
 
+// Order queries
+
+const saveOrder=(orderData)=>{
+    const order=new Order(orderData);
+
+    return order.save();
+
+}
+
+const calculateTotalOrderPrice=(name)=>{
+
+
+   return  Order.aggregate([
+    { $match: { userName:name} },
+
+      {
+         $group:{
+            _id:'$userName',
+            totalSum:{$sum:"$totalAmount"}
+
+         }
+      },
+      
+
+    ])
+
+}
+
+
 module.exports={
     getAllUsers,
     getUserByUsername,
@@ -155,5 +185,7 @@ module.exports={
     updateUserbyIdDb,
     updateUserbyIdDbByName,
     deleteUserbyIdDb,
-    paginatedGet
+    paginatedGet,
+    saveOrder,
+    calculateTotalOrderPrice
 }
