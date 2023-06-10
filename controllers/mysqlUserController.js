@@ -1,4 +1,4 @@
-const {selectData,insertData,updateData}=require("../db/mysqldb");
+const {selectData,insertData,updateData,deleteData}=require("../db/mysqldb");
 
 const insertUserData=(req,res,next)=>{
     insertData(req.body.name,req.body.age).then(data=>{
@@ -111,7 +111,7 @@ const updateUserByIdAndUserName=(req,res,next)=>{
    
    const deleteByUserById=(req,res,next)=>{
 
-    deleteUserbyIdDb(req.params.id).then(data=>{
+    deleteData(req.params.id).then(data=>{
    
        res.json({
            message:"Success",
