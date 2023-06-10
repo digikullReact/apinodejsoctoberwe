@@ -15,10 +15,11 @@ connect(URL).then(data=>{
     console.log("Error Connecting to the database");
 })
 
-
+/*
 Createconnection().then(data=>{
  console.log("Connected with mysql")
 }).catch(err=>{
   console.log(err);
 })
+*/
 
