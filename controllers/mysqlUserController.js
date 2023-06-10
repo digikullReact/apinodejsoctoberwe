@@ -1,4 +1,4 @@
-const {selectData,insertData}=require("../db/mysqldb");
+const {selectData,insertData,updateData}=require("../db/mysqldb");
 
 const insertUserData=(req,res,next)=>{
     insertData(req.body.name,req.body.age).then(data=>{
@@ -75,7 +75,7 @@ const getUserbyIdController=(req,res)=>{
 
 const updateUserById=(req,res,next)=>{
 
- updateUserbyIdDb(req.params.id,req.body).then(data=>{
+    updateData(req.body.name,req.body.age,req.params.id).then(data=>{
 
     res.json({
         message:"Success",
