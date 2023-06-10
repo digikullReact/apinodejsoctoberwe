@@ -1,6 +1,6 @@
 const express=require("express");
 const router=express.Router();
-const {getUserData,getUserbyIdController,updateUserById, updateUserByIdAndUserName, deleteByUserById, getUserDataPaginated}=require("../controllers/mysqlUserController");
+const {getUserData,getUserbyIdController,updateUserById, updateUserByIdAndUserName, deleteByUserById, getUserDataPaginated, insertUserData}=require("../controllers/mysqlUserController");
 
 const {checkAuthorization,encryptPassword}=require("../middlewares/middleware");
 
@@ -8,6 +8,8 @@ const {checkAuthorization,encryptPassword}=require("../middlewares/middleware");
 // will be   protected by this middleware
 //router.use(checkAuthorization)
 // Pagination  For   Api --->
+
+router.post("/",insertUserData)
 
 router.get("/pagination",getUserDataPaginated)
 router.get("/",getUserData)

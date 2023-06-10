@@ -1,4 +1,16 @@
-const {selectData}=require("../db/mysqldb");
+const {selectData,insertData}=require("../db/mysqldb");
+
+const insertUserData=(req,res,next)=>{
+    insertData(req.body.name,req.body.age).then(data=>{
+        res.json({
+            message:"Success",
+            data:data
+        })
+
+    }).catch(err=>{
+        next(err);
+    })
+}
 
 const getUserData=(req,res,next)=>{
 
@@ -120,5 +132,6 @@ module.exports={
     updateUserById,
     updateUserByIdAndUserName,
     deleteByUserById,
-    getUserDataPaginated
+    getUserDataPaginated,
+    insertUserData
 }
